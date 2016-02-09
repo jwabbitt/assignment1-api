@@ -26,6 +26,7 @@
     "supertest-as-promised": "^2.0.2"
   },
   "dependencies": {
+    "express": "^4.13.4",
     "superagent": "^1.7.2"
   }
 }
