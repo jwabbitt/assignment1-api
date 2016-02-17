@@ -20,7 +20,14 @@ html
     
     if reps
       for rep in reps
-        li
-          p=rep.name
-          p=rep.state
-          p=rep.email
+        ul
+          li
+            b #{rep.name}
+            p State: #{rep.state}
+            p=rep.email
+            if (rep.party === 'R')
+              p Party: Republican
+            else if (rep.party ==='D')
+              p Party: Democrat
+            p=rep.office
+            p=rep.phone
