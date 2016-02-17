@@ -1,0 +1,26 @@
+html
+  head
+    title Who is my representative?
+  body  
+    h1 Search for reps now!
+    
+    form(method='get' action='/')
+      select(name='type')
+        option(value='zip') Zip
+        option(value='name') Name
+        option(value='state') State
+      input(type='text' name='search')
+      button Submit
+      
+    if type
+      p You searched for type: #{type}
+    if search
+      p Your search query was: #{search}  
+    
+    
+    if reps
+      for rep in reps
+        li
+          p=rep.name
+          p=rep.state
+          p=rep.email
