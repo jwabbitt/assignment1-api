@@ -6,18 +6,20 @@ html
     
     form(method='get' action='/')
       select(name='type')
-        option(value='zip') Zip
-        option(value='name') Name
-        option(value='state') State
-      input(type='text' name='search')
+        option(value='zip' selected=(query.type === 'zip')) Zip
+        option(value='name' selected=(query.type === 'name')) Name
+        option(value='state' selected=(query.type === 'state') ) State
+      input(type='text' name='search' value=query.search)
       button Submit
       
-    if type
-      p You searched for type: #{type}
-    if search
-      p Your search query was: #{search}  
+    if query.type
+      p You searched for type: #{query.type}
+    if query.search
+      p Your search query was: #{query.search}  
     
-    
+    if query.type && query.search && !reps.length
+      p No reps found with #{query.type} of #{query.search}
+      
     if reps
       for rep in reps
         ul

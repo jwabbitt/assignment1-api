@@ -12,12 +12,12 @@ app.set('view engine', 'pug');
 
 app.get('/', function(req, res, next) {
   var method;
-  if (req.query.type === 'zip') {
-    method = reps.allByZip;
-  } else if (req.query.type === 'name') {
-    method = reps.repsByName;
-  } else if (req.query.type === 'state') {
-    method = reps.repsByState;
+
+  switch (req.query.type) {
+    case 'zip': method = reps.allByZip; break;
+    case 'name': method = reps.repsByName; break;
+    case 'state': method = reps.repsByState; break;
+    default: method = function(param, cb) { cb(null, []); }; break;
   }
 
   if (method) {
@@ -25,12 +25,9 @@ app.get('/', function(req, res, next) {
       if (err) {return next(err); }
       res.render('index', {
         reps: people,
-        type: req.query.type,
-        search: req.query.search,
+        query: req.query,
       });
     });
-  } else {
-  res.render('index');
   }
 });
 
